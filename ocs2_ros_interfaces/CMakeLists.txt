@@ -51,6 +51,7 @@ include_directories(
 add_library(${PROJECT_NAME}
   src/command/TargetTrajectoriesRosPublisher.cpp
   src/command/TargetTrajectoriesInteractiveMarker.cpp
+  src/command/TargetTrajectoriesInteractiveMarker_multy.cpp
   src/command/TargetTrajectoriesKeyboardPublisher.cpp
   src/common/RosMsgConversions.cpp
   src/common/RosMsgHelpers.cpp

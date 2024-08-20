@@ -97,6 +97,23 @@ auto PinocchioEndEffectorKinematics::getPosition(const vector_t& state) const ->
 /******************************************************************************************************/
 /******************************************************************************************************/
 /******************************************************************************************************/
+std::vector<Eigen::Quaternion<double>> PinocchioEndEffectorKinematics::getOrientation(const vector_t& state){
+  if (pinocchioInterfacePtr_ == nullptr) {
+    throw std::runtime_error("[PinocchioEndEffectorKinematics] pinocchioInterfacePtr_ is not set. Use setPinocchioInterface()");
+  }
+
+  const pinocchio::Data& data = pinocchioInterfacePtr_->getData();
+  std::vector<Eigen::Quaternion<double>> revolute;
+  for (const auto& frameId : endEffectorFrameIds_) {
+    revolute.emplace_back(matrixToQuaternion(data.oMf[frameId].rotation()));
+  }
+  return revolute;
+}
+
+
+/******************************************************************************************************/
+/******************************************************************************************************/
+/******************************************************************************************************/
 auto PinocchioEndEffectorKinematics::getVelocity(const vector_t& state, const vector_t& input) const -> std::vector<vector3_t> {
   if (pinocchioInterfacePtr_ == nullptr) {
     throw std::runtime_error("[PinocchioEndEffectorKinematics] pinocchioInterfacePtr_ is not set. Use setPinocchioInterface()");

@@ -88,6 +88,8 @@ class PinocchioEndEffectorKinematics final : public EndEffectorKinematics<scalar
    */
   std::vector<vector3_t> getPosition(const vector_t& state) const override;
 
+  std::vector<Eigen::Quaternion<double>> getOrientation(const vector_t& state);
+
   /** Get the end effector velocity vectors.
    * @note requires pinocchioInterface to be updated with:
    *       pinocchio::forwardKinematics(model, data, q, v)
